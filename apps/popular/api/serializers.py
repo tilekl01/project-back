@@ -11,6 +11,7 @@ class PopularSerializer(ModelSerializer):
             "category",
             "image",
             "title",
-            "by_name",
             "created_at",
+            "comment",
+            "is_active",
         ]

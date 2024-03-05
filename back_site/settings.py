@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "drf_yasg",
     'rest_framework',
+    'rest_framework_simplejwt',
     'apps.news',
     'apps.popular',
     'apps.popular_post',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'apps.music_news',
     'apps.discover',
     'apps.social_posts',
+    'apps.users',
 ]
 
 MIDDLEWARE = [
@@ -131,7 +133,33 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
-    'DEAFAULT_PERMISSION_CLASSES': [
+    'DEAFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.AllowAny'
-    ]
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
 }
+
+"""
+{
+    "username": "tilekdev",
+    "password": "123123123",
+} POST request -> localhost:8000/api/v1/users/token/
+
+Response -> {
+    "refresh": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImV4cCI6MTcwOTQ2MTA1MiwiaWF0IjoxNzA5Mzc0NjUyLCJqdGkiOiJjN2I3NDkxM2I0YTM0NTY5YjQ3OWI0YmU2MDIxMjAxNyIsInVzZXJfaWQiOjF9.OU4daLbOCoVdiK-1O7Qlr65DohhQWGSH4OmWZBLLoms",
+    "access": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5Mzc0OTUyLCJpYXQiOjE3MDkzNzQ2NTIsImp0aSI6ImZkYTI4YWQ5MTFkZTRkYjVhNzJlOGI1NWZhODk5ZGMyIiwidXNlcl9pZCI6MX0.8nawdY6Prwg-e8mlpO1LcH4jFw3mabzt47rf3Ek2IRg"
+}
+-> {
+    "error":"credintails is not valid",
+}
+access_token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzA5Mzc2MjAzLCJpYXQiOjE3MDkzNzQ2NTIsImp0aSI6ImQ0MWI5MGE1ZDM1NjQ0YmU5ZjJiOTk3YzdiMGI5MjAzIiwidXNlcl9pZCI6MX0.SrYQLB5x13UlL8B6RB6CTbKG6IE6uMBlHFGLXfPH0KI"
+{
+    "Authenticated": f"Bearer {access_token}"
+}
+
+"""
