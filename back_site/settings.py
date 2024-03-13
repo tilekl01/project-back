@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'apps.discover',
     'apps.social_posts',
     'apps.users',
+    'apps.categories',
 ]
 
 MIDDLEWARE = [

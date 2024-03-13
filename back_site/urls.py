@@ -35,6 +35,7 @@ api_urlpatterns = [
     path('', include('apps.popular_post.api.urls')),
     path('', include('apps.social_posts.api.urls')),
     path('', include('apps.users.urls')),
+    path('', include('apps.categories.urls')),
     path("swagger(<format>\.json|\.yaml)", schema_view.without_ui(cache_timeout=0), name="schema-json"),
     path("swagger/", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
@@ -51,8 +52,9 @@ urlpatterns = [
     path('news/', include('apps.news.urls')),
     path('popular/', include('apps.popular.urls')),
     path('popular_post/', include('apps.popular_post.urls')),
-    path('social_posts', include('apps.social_posts.urls')),
+    path('social_posts/', include('apps.social_posts.urls')),
     path('users/', include('apps.users.urls')),
+    path('categories/', include('apps.categories.urls')),
     path('api/', include(api_urlpatterns)),
     
     path('api/token/verify/',TokenVerifyView.as_view(), name='token_verify'),
